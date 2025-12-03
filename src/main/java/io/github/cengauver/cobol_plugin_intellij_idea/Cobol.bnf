@@ -1,0 +1,58 @@
+{
+    parserClass="io.github.cengauver.cobol_plugin_intellij_idea.parser.CobolParser"
+    extends="com.intellij.extapi.psi.ASTWrapperPsiElement"
+
+    psiClassPrefix="Cobol"
+    psiImplClassSuffix="Impl"
+    psiPackage="io.github.cengauver.cobol_plugin_intellij_idea.psi.impl"
+
+    elementTypeHolderClass="io.github.cengauver.cobol_plugin_intellij_idea.psi.CobolTypes"
+    elementTypeClass="io.github.cengauver.cobol_plugin_intellij_idea.psi.CobolElementType"
+    tokenTypeClass="io.github.cengauver.cobol_plugin_intellij_idea.psi.CobolTokenType"
+
+
+    tokens = [
+        IDENTIFICATION_KEYWORD = 'IDENTIFICATION'
+        ID_KEYWORD = 'ID'
+        DIVISION_KEYWORD = 'DIVISION'
+        ENVIRONMENT_KEYWORD = 'ENVIRONMENT'
+        DATA_KEYWORD = 'DATA'
+        END_KEYWORD = 'END'
+        PROGRAM_KEYWORD = 'PROGRAM'
+
+        PERIOD = '.'
+        WHITESPACE = 'regexp:\s+'
+
+    ]
+}
+
+    //( "IDENTIFICATION" | "ID" ) "DIVISION" "." program-id-cobol-source-program
+      //[ identification-division-content ]
+      //[ "ENVIRONMENT" "DIVISION" "." environment-division-content ]
+      //[ "DATA" "DIVISION" "." data-division-content ]
+      //[ procedure-division ]
+      //[ { nested-cobol-source-program }* "END" "PROGRAM" program-name "." ]
+
+
+   cobol-source-program ::=  ( IDENTIFICATION_KEYWORD | ID_KEYWORD ) DIVISION_KEYWORD PERIOD
+                             program-id-cobol-source-program identification-division-content?
+                             (ENVIRONMENT_KEYWORD DIVISION_KEYWORD PERIOD environment-division-content)?
+                             (DATA_KEYWORD DIVISION_KEYWORD PERIOD data-division-content)?
+                             procedure-division?
+                             ( {nested-cobol-source-program}*  END_KEYWORD PROGRAM_KEYWORD program-name PERIOD)?
+
+identification-header ::=
+
+program-id-cobol-source-program ::=
+
+identification-division-content ::=
+
+environment-division-content ::=
+
+data-division-content ::=
+
+procedure-division ::=
+
+nested-cobol-source-program ::=
+
+program-name ::=

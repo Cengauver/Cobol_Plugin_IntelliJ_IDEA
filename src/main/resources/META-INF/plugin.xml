@@ -24,6 +24,11 @@
     <!-- Extension points defined by the plugin.
          Read more: https://plugins.jetbrains.com/docs/intellij/plugin-extension-points.html -->
     <extensions defaultExtensionNs="com.intellij">
-
+        <fileType
+                name="Cobol File"
+                implementationClass="io.github.cengauver.cobol_plugin_intellij_idea.CobolFileType"
+                fieldName="INSTANCE"
+                language="Cobol"
+                extensions="cbl"/>s
     </extensions>
 </idea-plugin>

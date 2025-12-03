@@ -34,7 +34,7 @@ public final class CobolFileType extends LanguageFileType {
         return "cbl";
     }
 
-    // TODO: Add cob as an extension as well.
+    // TODO: Add cob as an extension as well (plugin.xml has a config for that).
 
     @Override
     public Icon getIcon() {

@@ -12,47 +12,23 @@
 
 
     tokens = [
-        IDENTIFICATION_KEYWORD = 'IDENTIFICATION'
-        ID_KEYWORD = 'ID'
-        DIVISION_KEYWORD = 'DIVISION'
-        ENVIRONMENT_KEYWORD = 'ENVIRONMENT'
-        DATA_KEYWORD = 'DATA'
-        END_KEYWORD = 'END'
-        PROGRAM_KEYWORD = 'PROGRAM'
+    IDENTIFICATION_KEYWORD = "IDENTIFICATION"
+    DIVISION_KEYWORD = "DIVISION"
+    PROGRAM_ID_KEYWORD = "PROGRAM-ID"
 
-        PERIOD = '.'
-        WHITESPACE = 'regexp:\s+'
 
+    LINE_NUMBER ="regexp:^[0-9]{2}"
+    PROGRAM_NAME = "regexp:[a-zA-Z][a-zA-Z0-9\-_]*"
+
+    PERIOD = "."
+    WHITESPACE="regexp:\s+"
     ]
 }
 
-    //( "IDENTIFICATION" | "ID" ) "DIVISION" "." program-id-cobol-source-program
-      //[ identification-division-content ]
-      //[ "ENVIRONMENT" "DIVISION" "." environment-division-content ]
-      //[ "DATA" "DIVISION" "." data-division-content ]
-      //[ procedure-division ]
-      //[ { nested-cobol-source-program }* "END" "PROGRAM" program-name "." ]
+cobol_source ::= identification_division data_division? procedure_division?
 
+identification_division ::=   LINE_NUMBER WHITESPACE IDENTIFICATION_KEYWORD WHITESPACE DIVISION_KEYWORD PERIOD WHITESPACE
+                              LINE_NUMBER WHITESPACE PROGRAM_ID_KEYWORD PERIOD? WHITESPACE PROGRAM_NAME PERIOD?
+data_division ::=   LINE_NUMBER
 
-   cobol-source-program ::=  ( IDENTIFICATION_KEYWORD | ID_KEYWORD ) DIVISION_KEYWORD PERIOD
-                             program-id-cobol-source-program identification-division-content?
-                             (ENVIRONMENT_KEYWORD DIVISION_KEYWORD PERIOD environment-division-content)?
-                             (DATA_KEYWORD DIVISION_KEYWORD PERIOD data-division-content)?
-                             procedure-division?
-                             ( {nested-cobol-source-program}*  END_KEYWORD PROGRAM_KEYWORD program-name PERIOD)?
-
-identification-header ::=
-
-program-id-cobol-source-program ::=
-
-identification-division-content ::=
-
-environment-division-content ::=
-
-data-division-content ::=
-
-procedure-division ::=
-
-nested-cobol-source-program ::=
-
-program-name ::=
+procedure_division ::= LINE_NUMBER

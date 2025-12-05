@@ -21,19 +21,26 @@
     PICTURE_KEYWORD = "PICTURE"
     PIC_KEYWORD = "PIC"
     IS_KEYWORD = "IS"
+    VALUE_KEYWORD = "VALUE"
+    PROCEDURE_KEYWORD = "PROCEDURE"
+    PERFORM_KEYWORD = "PERFORM"
+    VARYING_KEYWORD = "VARYING"
+    FROM_KEYWORD = "FROM"
+    BY_KEYWORD = "BY"
+    UNTIL_KEYWORD = "UNTIL"
 
     LINE_NUMBER ="regexp:^[0-9]{2}"
     NUMBER_LITERAL = "regexp:[0-9]+"
 
-
     PERIOD = "."
+    LPAREN = "("
+    RPAREN = ")"
     WHITE_SPACE="regexp:[ \n\r\t\f]+"
     IDENTIFIER = "regexp:[a-zA-Z0-9][a-zA-Z0-9\-]*"
     currency = "regexp:~[0-9ABCDPRSVXZa-z\*\+\-\/\,\.\;\(\)\=\'\"\ \n]"
     picchar = "regexp:([ABEGPSVXZabegpsvxz90\+\-\*\$]|CR|DB)"
 
     punctuation = "regexp:[\/\,\.\:]"
-
 
     ]
 }
@@ -45,14 +52,30 @@ identification_division ::=   LINE_NUMBER IDENTIFICATION_KEYWORD DIVISION_KEYWOR
 data_division ::=   LINE_NUMBER DATA_KEYWORD DIVISION_KEYWORD PERIOD
                     data_content
 
-procedure_division ::= LINE_NUMBER
+procedure_division ::= LINE_NUMBER PROCEDURE_KEYWORD DIVISION_KEYWORD PERIOD sentence* paragraph*
 
 data_content ::= (LINE_NUMBER WORKING_STORAGE_KEYWORD SECTION_KEYWORD PERIOD (data_entry)* )?
 
-data_entry ::= LINE_NUMBER LINE_NUMBER data_name
+data_entry ::= LINE_NUMBER LINE_NUMBER data_name (picture_clause | data_value_clause)*
 
 data_name ::= IDENTIFIER
 
 picture_clause ::= (PIC_KEYWORD | PICTURE_KEYWORD) IS_KEYWORD? picture_string
 
-picture_string ::= currency?
+data_value_clause ::= VALUE_KEYWORD IS_KEYWORD? NUMBER_LITERAL PERIOD? //Maybe add string literals too later
+
+picture_string ::= pic_type LPAREN NUMBER_LITERAL RPAREN
+
+pic_type ::= NUMBER_LITERAL | IDENTIFIER
+
+paragraph ::= LINE_NUMBER paragraph_name PERIOD (sentence)*
+
+paragraph_name ::= IDENTIFIER
+
+sentence ::= (statement LINE_NUMBER?)+ PERIOD
+
+statement ::= (perform_varying_statement|display_statement|stop_statement)
+perform_varying_statement ::= PERFORM_KEYWORD IDENTIFIER VARYING_KEYWORD IDENTIFIER FROM_KEYWORD NUMBER_LITERAL BY_KEYWORD NUMBER_LITERAL UNTIL_KEYWORD condition
+display_statement ::=
+stop_statement ::=
+condition ::=

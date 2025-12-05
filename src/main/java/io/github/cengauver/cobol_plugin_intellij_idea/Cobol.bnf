@@ -15,20 +15,44 @@
     IDENTIFICATION_KEYWORD = "IDENTIFICATION"
     DIVISION_KEYWORD = "DIVISION"
     PROGRAM_ID_KEYWORD = "PROGRAM-ID"
-
+    DATA_KEYWORD = "DATA"
+    WORKING_STORAGE_KEYWORD = "WORKING-STORAGE"
+    SECTION_KEYWORD = "SECTION"
+    PICTURE_KEYWORD = "PICTURE"
+    PIC_KEYWORD = "PIC"
+    IS_KEYWORD = "IS"
 
     LINE_NUMBER ="regexp:^[0-9]{2}"
-    PROGRAM_NAME = "regexp:[a-zA-Z][a-zA-Z0-9\-_]*"
+    NUMBER_LITERAL = "regexp:[0-9]+"
+
 
     PERIOD = "."
-    WHITESPACE="regexp:\s+"
+    WHITE_SPACE="regexp:[ \n\r\t\f]+"
+    IDENTIFIER = "regexp:[a-zA-Z0-9][a-zA-Z0-9\-]*"
+    currency = "regexp:~[0-9ABCDPRSVXZa-z\*\+\-\/\,\.\;\(\)\=\'\"\ \n]"
+    picchar = "regexp:([ABEGPSVXZabegpsvxz90\+\-\*\$]|CR|DB)"
+
+    punctuation = "regexp:[\/\,\.\:]"
+
+
     ]
 }
 
 cobol_source ::= identification_division data_division? procedure_division?
 
-identification_division ::=   LINE_NUMBER WHITESPACE IDENTIFICATION_KEYWORD WHITESPACE DIVISION_KEYWORD PERIOD WHITESPACE
-                              LINE_NUMBER WHITESPACE PROGRAM_ID_KEYWORD PERIOD? WHITESPACE PROGRAM_NAME PERIOD?
-data_division ::=   LINE_NUMBER
+identification_division ::=   LINE_NUMBER IDENTIFICATION_KEYWORD DIVISION_KEYWORD PERIOD
+                              LINE_NUMBER PROGRAM_ID_KEYWORD PERIOD? IDENTIFIER PERIOD?
+data_division ::=   LINE_NUMBER DATA_KEYWORD DIVISION_KEYWORD PERIOD
+                    data_content
 
 procedure_division ::= LINE_NUMBER
+
+data_content ::= (LINE_NUMBER WORKING_STORAGE_KEYWORD SECTION_KEYWORD PERIOD (data_entry)* )?
+
+data_entry ::= LINE_NUMBER LINE_NUMBER data_name
+
+data_name ::= IDENTIFIER
+
+picture_clause ::= (PIC_KEYWORD | PICTURE_KEYWORD) IS_KEYWORD? picture_string
+
+picture_string ::= currency?

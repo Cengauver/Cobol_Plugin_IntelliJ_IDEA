@@ -84,12 +84,12 @@ paragraph ::= LINE_NUMBER paragraph_name PERIOD (sentence)*
 
 paragraph_name ::= IDENTIFIER
 
-sentence ::= (statement LINE_NUMBER?)+ PERIOD
+sentence ::= (statement)+ PERIOD
 
 statement ::= (perform_varying_statement|display_statement|stop_statement)
-perform_varying_statement ::= PERFORM_KEYWORD IDENTIFIER VARYING_KEYWORD IDENTIFIER FROM_KEYWORD NUMBER_LITERAL BY_KEYWORD NUMBER_LITERAL UNTIL_KEYWORD condition
-display_statement ::= DISPLAY_KEYWORD (IDENTIFIER | NUMBER_LITERAL | SINGLE_QUOTE)+
-stop_statement ::= STOP (RUN|IDENTIFIER|NUMBER_LITERAL)
+perform_varying_statement ::= LINE_NUMBER PERFORM_KEYWORD IDENTIFIER VARYING_KEYWORD IDENTIFIER FROM_KEYWORD NUMBER_LITERAL BY_KEYWORD NUMBER_LITERAL UNTIL_KEYWORD condition {pin=2}
+display_statement ::= LINE_NUMBER DISPLAY_KEYWORD (IDENTIFIER | NUMBER_LITERAL | SINGLE_QUOTE)+ {pin=2}
+stop_statement ::= LINE_NUMBER STOP_KEYWORD (RUN_KEYWORD|IDENTIFIER|NUMBER_LITERAL) {pin=2}
 condition ::= arithmetic_exp relational_operator arithmetic_exp
 arithmetic_exp ::= (IDENTIFIER | NUMBER_LITERAL) ((PLUS|MINUS) (IDENTIFIER | NUMBER_LITERAL))*
 relational_operator ::= (IS_KEYWORD | NOT_KEYWORD | GREATER_EQUAL | LESS_EQUAL | GREATER_THAN | LESS_THAN | EQUALS)

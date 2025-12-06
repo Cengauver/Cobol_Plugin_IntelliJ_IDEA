@@ -30,7 +30,6 @@ public interface CobolTypes {
   IElementType STOP_STATEMENT = new CobolElementType("STOP_STATEMENT");
 
   IElementType BY_KEYWORD = new CobolTokenType("BY");
-  IElementType CURRENCY = new CobolTokenType("currency");
   IElementType DATA_KEYWORD = new CobolTokenType("DATA");
   IElementType DISPLAY_KEYWORD = new CobolTokenType("DISPLAY");
   IElementType DIVISION_KEYWORD = new CobolTokenType("DIVISION");
@@ -50,13 +49,11 @@ public interface CobolTypes {
   IElementType NUMBER_LITERAL = new CobolTokenType("NUMBER_LITERAL");
   IElementType PERFORM_KEYWORD = new CobolTokenType("PERFORM");
   IElementType PERIOD = new CobolTokenType(".");
-  IElementType PICCHAR = new CobolTokenType("picchar");
   IElementType PICTURE_KEYWORD = new CobolTokenType("PICTURE");
   IElementType PIC_KEYWORD = new CobolTokenType("PIC");
   IElementType PLUS = new CobolTokenType("+");
   IElementType PROCEDURE_KEYWORD = new CobolTokenType("PROCEDURE");
   IElementType PROGRAM_ID_KEYWORD = new CobolTokenType("PROGRAM-ID");
-  IElementType PUNCTUATION = new CobolTokenType("punctuation");
   IElementType RPAREN = new CobolTokenType(")");
   IElementType RUN_KEYWORD = new CobolTokenType("RUN");
   IElementType SECTION_KEYWORD = new CobolTokenType("SECTION");

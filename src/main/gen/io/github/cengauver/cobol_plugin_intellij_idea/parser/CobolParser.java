@@ -182,8 +182,7 @@ public class CobolParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // LINE_NUMBER DATA_KEYWORD DIVISION_KEYWORD PERIOD
-  //                     data_content
+  // LINE_NUMBER DATA_KEYWORD DIVISION_KEYWORD PERIOD data_content
   public static boolean data_division(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "data_division")) return false;
     if (!nextTokenIs(b, LINE_NUMBER)) return false;
@@ -310,8 +309,7 @@ public class CobolParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // LINE_NUMBER IDENTIFICATION_KEYWORD DIVISION_KEYWORD PERIOD
-  //                               LINE_NUMBER PROGRAM_ID_KEYWORD PERIOD? IDENTIFIER PERIOD?
+  // LINE_NUMBER IDENTIFICATION_KEYWORD DIVISION_KEYWORD PERIOD LINE_NUMBER PROGRAM_ID_KEYWORD PERIOD? IDENTIFIER PERIOD?
   public static boolean identification_division(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "identification_division")) return false;
     if (!nextTokenIs(b, LINE_NUMBER)) return false;
@@ -445,15 +443,32 @@ public class CobolParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // pic_type LPAREN NUMBER_LITERAL RPAREN
+  // pic_type (LPAREN NUMBER_LITERAL RPAREN)?
   public static boolean picture_string(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "picture_string")) return false;
     if (!nextTokenIs(b, "<picture string>", IDENTIFIER, NUMBER_LITERAL)) return false;
     boolean r;
     Marker m = enter_section_(b, l, _NONE_, PICTURE_STRING, "<picture string>");
     r = pic_type(b, l + 1);
-    r = r && consumeTokens(b, 0, LPAREN, NUMBER_LITERAL, RPAREN);
+    r = r && picture_string_1(b, l + 1);
     exit_section_(b, l, m, r, false, null);
+    return r;
+  }
+
+  // (LPAREN NUMBER_LITERAL RPAREN)?
+  private static boolean picture_string_1(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "picture_string_1")) return false;
+    picture_string_1_0(b, l + 1);
+    return true;
+  }
+
+  // LPAREN NUMBER_LITERAL RPAREN
+  private static boolean picture_string_1_0(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "picture_string_1_0")) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = consumeTokens(b, 0, LPAREN, NUMBER_LITERAL, RPAREN);
+    exit_section_(b, m, null, r);
     return r;
   }
 

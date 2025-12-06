@@ -10,7 +10,7 @@ public interface CobolPictureString extends PsiElement {
   @NotNull
   CobolPicType getPicType();
 
-  @NotNull
+  @Nullable
   PsiElement getNumberLiteral();
 
 }

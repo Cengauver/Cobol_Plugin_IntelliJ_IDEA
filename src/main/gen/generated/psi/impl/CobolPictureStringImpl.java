@@ -34,9 +34,9 @@ public class CobolPictureStringImpl extends ASTWrapperPsiElement implements Cobo
   }
 
   @Override
-  @NotNull
+  @Nullable
   public PsiElement getNumberLiteral() {
-    return findNotNullChildByType(NUMBER_LITERAL);
+    return findChildByType(NUMBER_LITERAL);
   }
 
 }

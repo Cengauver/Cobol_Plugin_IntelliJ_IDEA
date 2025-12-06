@@ -49,20 +49,15 @@
     SINGLE_QUOTE = "'"
     WHITE_SPACE="regexp:[ \n\r\t\f]+"
     IDENTIFIER = "regexp:[a-zA-Z0-9][a-zA-Z0-9\-]*"
-    currency = "regexp:~[0-9ABCDPRSVXZa-z\*\+\-\/\,\.\;\(\)\=\'\"\ \n]"
-    picchar = "regexp:([ABEGPSVXZabegpsvxz90\+\-\*\$]|CR|DB)"
-
-    punctuation = "regexp:[\/\,\.\:]"
 
     ]
 }
 
 cobol_source ::= identification_division data_division? procedure_division?
 
-identification_division ::=   LINE_NUMBER IDENTIFICATION_KEYWORD DIVISION_KEYWORD PERIOD
-                              LINE_NUMBER PROGRAM_ID_KEYWORD PERIOD? IDENTIFIER PERIOD?
-data_division ::=   LINE_NUMBER DATA_KEYWORD DIVISION_KEYWORD PERIOD
-                    data_content
+identification_division ::=   LINE_NUMBER IDENTIFICATION_KEYWORD DIVISION_KEYWORD PERIOD LINE_NUMBER PROGRAM_ID_KEYWORD PERIOD? IDENTIFIER PERIOD?
+
+data_division ::=   LINE_NUMBER DATA_KEYWORD DIVISION_KEYWORD PERIOD data_content
 
 procedure_division ::= LINE_NUMBER PROCEDURE_KEYWORD DIVISION_KEYWORD PERIOD sentence* paragraph*
 
@@ -76,7 +71,7 @@ picture_clause ::= (PIC_KEYWORD | PICTURE_KEYWORD) IS_KEYWORD? picture_string
 
 data_value_clause ::= VALUE_KEYWORD IS_KEYWORD? NUMBER_LITERAL PERIOD? //Maybe add string literals too later
 
-picture_string ::= pic_type LPAREN NUMBER_LITERAL RPAREN
+picture_string ::= pic_type (LPAREN NUMBER_LITERAL RPAREN)?
 
 pic_type ::= NUMBER_LITERAL | IDENTIFIER
 
@@ -87,9 +82,15 @@ paragraph_name ::= IDENTIFIER
 sentence ::= (statement)+ PERIOD
 
 statement ::= (perform_varying_statement|display_statement|stop_statement)
+
 perform_varying_statement ::= LINE_NUMBER PERFORM_KEYWORD IDENTIFIER VARYING_KEYWORD IDENTIFIER FROM_KEYWORD NUMBER_LITERAL BY_KEYWORD NUMBER_LITERAL UNTIL_KEYWORD condition {pin=2}
+
 display_statement ::= LINE_NUMBER DISPLAY_KEYWORD (IDENTIFIER | NUMBER_LITERAL | SINGLE_QUOTE)+ {pin=2}
+
 stop_statement ::= LINE_NUMBER STOP_KEYWORD (RUN_KEYWORD|IDENTIFIER|NUMBER_LITERAL) {pin=2}
+
 condition ::= arithmetic_exp relational_operator arithmetic_exp
+
 arithmetic_exp ::= (IDENTIFIER | NUMBER_LITERAL) ((PLUS|MINUS) (IDENTIFIER | NUMBER_LITERAL))*
+
 relational_operator ::= (IS_KEYWORD | NOT_KEYWORD | GREATER_EQUAL | LESS_EQUAL | GREATER_THAN | LESS_THAN | EQUALS)

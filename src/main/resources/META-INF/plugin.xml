@@ -30,5 +30,7 @@
                 fieldName="INSTANCE"
                 language="Cobol"
                 extensions="cbl"/>s
+        <lang.parserDefinition language="Cobol"
+                               implementationClass="io.github.cengauver.cobol_plugin_intellij_idea.CobolParserDefinition"/>
     </extensions>
 </idea-plugin>

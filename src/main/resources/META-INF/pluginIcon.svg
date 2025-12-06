@@ -1,12 +1,32 @@
-<svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <path d="M32.0845 7.94025V4H24.0203V7.9896H16.029V4H7.91553V7.94025H4V36H16.0044V32.0045C16.0058 30.9457 16.4274 29.9308 17.1766 29.1826C17.9258 28.4345 18.9412 28.0143 20 28.0143C21.0588 28.0143 22.0743 28.4345 22.8234 29.1826C23.5726 29.9308 23.9942 30.9457 23.9956 32.0045V36H36V7.94025H32.0845Z"
-          fill="url(#paint0_linear)"/>
+<svg width="40" height="40" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg">
     <defs>
-        <linearGradient id="paint0_linear" x1="2.94192" y1="4.89955" x2="37.7772" y2="39.7345"
-                        gradientUnits="userSpaceOnUse">
-            <stop offset="0.15937" stop-color="#3BEA62"/>
-            <stop offset="0.5404" stop-color="#3C99CC"/>
-            <stop offset="0.93739" stop-color="#6B57FF"/>
-        </linearGradient>
+        <style type="text/css"><![CDATA[
+      .background { fill: #2B2D30; } /* Dark IDE Background */
+      .flow-line { stroke: #A9B7C6; stroke-width: 2; } /* Connecting wires */
+      .symbol-start { fill: #6A9955; } /* Green (Start/Entry) */
+      .symbol-decision { fill: #FFC300; } /* Gold (If/Else Logic) */
+      .symbol-process { fill: #569CD6; } /* Blue (Execution/Move/Add) */
+    ]]></style>
     </defs>
+
+    <!-- Background: Rounded Square -->
+    <rect class="background" x="2" y="2" width="36" height="36" rx="8"/>
+
+    <!-- The Execution Line: A vertical wire connecting the logic -->
+    <line class="flow-line" x1="20" y1="8" x2="20" y2="34" />
+
+    <!-- 1. The Terminator (Start): A rounded pill shape at the top -->
+    <rect class="symbol-start" x="12" y="6" width="16" height="6" rx="3" />
+
+    <!-- 2. The Decision (Logic): A Diamond in the center -->
+    <!-- Represents the "IF" statements and complex conditions -->
+    <path class="symbol-decision" d="M 20 16 L 28 22 L 20 28 L 12 22 Z" />
+
+    <!-- 3. The Process (Action): A Rectangle at the bottom -->
+    <!-- Represents MOVE, ADD, DISPLAY statements -->
+    <rect class="symbol-process" x="10" y="31" width="20" height="6" rx="1" />
+
+    <!-- Accent: Small white shine on the diamond to make it pop -->
+    <circle cx="20" cy="22" r="1.5" fill="white" opacity="0.4"/>
+
 </svg>

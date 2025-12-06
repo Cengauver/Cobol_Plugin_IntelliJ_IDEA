@@ -8,13 +8,12 @@
     <name>Cobol_Plugin_IntelliJ_IDEA</name>
 
     <!-- A displayed Vendor name or Organization ID displayed on the Plugins Page. -->
-    <vendor url="https://www.yourcompany.com">YourCompany</vendor>
+    <vendor url="https://github.com/Cengauver">Cengauver_Github</vendor>
 
     <!-- Description of the plugin displayed on the Plugin Page and IDE Plugin Manager.
          Guidelines: https://plugins.jetbrains.com/docs/marketplace/best-practices-for-listing.html#plugin-description -->
     <description><![CDATA[
-        Enter short description for your plugin here.<br>
-        <em>most HTML tags may be used</em>
+        Support Plugin for the Cobol Programming Language.<br>
     ]]></description>
 
     <!-- Product and plugin compatibility requirements.

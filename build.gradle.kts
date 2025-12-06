@@ -52,6 +52,12 @@ tasks {
         sourceCompatibility = "21"
         targetCompatibility = "21"
     }
+    build {
+        dependsOn(buildPlugin)
+    }
+    assemble {
+        dependsOn(buildPlugin)
+    }
 }
 
 kotlin {

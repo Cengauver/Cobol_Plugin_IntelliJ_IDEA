@@ -34,5 +34,6 @@
                                implementationClass="io.github.cengauver.cobol_plugin_intellij_idea.CobolParserDefinition"/>
         <lang.syntaxHighlighterFactory language="Cobol"
                                        implementationClass="io.github.cengauver.cobol_plugin_intellij_idea.CobolSyntaxHighlighterFactory"/>
+        <colorSettingsPage implementation="io.github.cengauver.cobol_plugin_intellij_idea.CobolColorSettingsPage"/>
     </extensions>
 </idea-plugin>

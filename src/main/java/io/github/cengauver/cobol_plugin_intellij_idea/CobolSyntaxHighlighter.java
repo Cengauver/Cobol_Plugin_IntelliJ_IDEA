@@ -15,7 +15,7 @@ import static com.intellij.openapi.editor.colors.TextAttributesKey.createTextAtt
 
 public class CobolSyntaxHighlighter extends SyntaxHighlighterBase {
 
-    public static final TextAttributesKey DIVISION_KEYWORD = createTextAttributesKey("DIVISION_KEYWORD", DefaultLanguageHighlighterColors.CLASS_NAME);
+    public static final TextAttributesKey DIVISION_KEYWORD = createTextAttributesKey("DIVISION_KEYWORD", DefaultLanguageHighlighterColors.FUNCTION_DECLARATION);
     public static final TextAttributesKey KEYWORD = createTextAttributesKey("COBOL_KEYWORD", DefaultLanguageHighlighterColors.KEYWORD);
     public static final TextAttributesKey IDENTIFIER = createTextAttributesKey("COBOL_IDENTIFIER", DefaultLanguageHighlighterColors.IDENTIFIER);
     public static final TextAttributesKey STRING = createTextAttributesKey("COBOL_STRING", DefaultLanguageHighlighterColors.STRING);

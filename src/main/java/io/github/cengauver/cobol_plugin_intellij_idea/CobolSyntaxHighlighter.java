@@ -15,6 +15,7 @@ import static com.intellij.openapi.editor.colors.TextAttributesKey.createTextAtt
 
 public class CobolSyntaxHighlighter extends SyntaxHighlighterBase {
 
+    public static final TextAttributesKey DIVISION_KEYWORD = createTextAttributesKey("DIVISION_KEYWORD", DefaultLanguageHighlighterColors.CLASS_NAME);
     public static final TextAttributesKey KEYWORD = createTextAttributesKey("COBOL_KEYWORD", DefaultLanguageHighlighterColors.KEYWORD);
     public static final TextAttributesKey IDENTIFIER = createTextAttributesKey("COBOL_IDENTIFIER", DefaultLanguageHighlighterColors.IDENTIFIER);
     public static final TextAttributesKey STRING = createTextAttributesKey("COBOL_STRING", DefaultLanguageHighlighterColors.STRING);
@@ -28,6 +29,7 @@ public class CobolSyntaxHighlighter extends SyntaxHighlighterBase {
     public static final TextAttributesKey BAD_CHARACTER = createTextAttributesKey("COBOL_BAD_CHARACTER", HighlighterColors.BAD_CHARACTER);
 
 
+    private static final TextAttributesKey[] DIVISION_KEYWORD_KEYS = new TextAttributesKey[]{DIVISION_KEYWORD};
     private static final TextAttributesKey[] KEYWORD_KEYS = new TextAttributesKey[]{KEYWORD};
     private static final TextAttributesKey[] STRING_KEYS = new TextAttributesKey[]{STRING};
     private static final TextAttributesKey[] NUMBER_KEYS = new TextAttributesKey[]{NUMBER};
@@ -62,6 +64,10 @@ public class CobolSyntaxHighlighter extends SyntaxHighlighterBase {
         }
         if (tokenType.equals(CobolTypes.PERIOD)) {
             return DOT_KEYS;
+        }
+        // It is crucial that division keyword condition check is set before the keyword condition check.
+        if (CobolTokenSets.DIVISION_KEYWORDS.contains(tokenType)) {
+            return DIVISION_KEYWORD_KEYS;
         }
         if (CobolTokenSets.KEYWORDS.contains(tokenType)) {
             return KEYWORD_KEYS;

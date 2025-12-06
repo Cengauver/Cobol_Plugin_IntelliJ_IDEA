@@ -26,7 +26,12 @@ public interface CobolTokenSets {
             CobolTypes.STOP_KEYWORD,
             CobolTypes.RUN_KEYWORD
     );
-
+    TokenSet DIVISION_KEYWORDS = TokenSet.create(
+            CobolTypes.DIVISION_KEYWORD,
+            CobolTypes.IDENTIFICATION_KEYWORD,
+            CobolTypes.DATA_KEYWORD,
+            CobolTypes.PROCEDURE_KEYWORD
+    );
     // There is no comment support yet.
     TokenSet COMMENTS = TokenSet.EMPTY;
 

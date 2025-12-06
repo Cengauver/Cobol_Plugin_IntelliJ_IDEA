@@ -270,7 +270,7 @@ public class CobolParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // LINE_NUMBER DISPLAY_KEYWORD (IDENTIFIER | NUMBER_LITERAL | SINGLE_QUOTE)+
+  // LINE_NUMBER DISPLAY_KEYWORD (IDENTIFIER | NUMBER_LITERAL | STRING_LITERAL)+
   public static boolean display_statement(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "display_statement")) return false;
     if (!nextTokenIs(b, LINE_NUMBER)) return false;
@@ -283,7 +283,7 @@ public class CobolParser implements PsiParser, LightPsiParser {
     return r || p;
   }
 
-  // (IDENTIFIER | NUMBER_LITERAL | SINGLE_QUOTE)+
+  // (IDENTIFIER | NUMBER_LITERAL | STRING_LITERAL)+
   private static boolean display_statement_2(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "display_statement_2")) return false;
     boolean r;
@@ -298,13 +298,13 @@ public class CobolParser implements PsiParser, LightPsiParser {
     return r;
   }
 
-  // IDENTIFIER | NUMBER_LITERAL | SINGLE_QUOTE
+  // IDENTIFIER | NUMBER_LITERAL | STRING_LITERAL
   private static boolean display_statement_2_0(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "display_statement_2_0")) return false;
     boolean r;
     r = consumeToken(b, IDENTIFIER);
     if (!r) r = consumeToken(b, NUMBER_LITERAL);
-    if (!r) r = consumeToken(b, SINGLE_QUOTE);
+    if (!r) r = consumeToken(b, STRING_LITERAL);
     return r;
   }
 

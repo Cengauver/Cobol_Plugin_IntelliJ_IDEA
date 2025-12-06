@@ -59,6 +59,8 @@ public interface CobolTypes {
   IElementType SECTION_KEYWORD = new CobolTokenType("SECTION");
   IElementType SINGLE_QUOTE = new CobolTokenType("'");
   IElementType STOP_KEYWORD = new CobolTokenType("STOP");
+  IElementType STRINGLITERAL = new CobolTokenType("");
+  IElementType STRING_LITERAL = new CobolTokenType("STRING_LITERAL");
   IElementType UNTIL_KEYWORD = new CobolTokenType("UNTIL");
   IElementType VALUE_KEYWORD = new CobolTokenType("VALUE");
   IElementType VARYING_KEYWORD = new CobolTokenType("VARYING");

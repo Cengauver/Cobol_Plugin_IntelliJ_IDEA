@@ -49,7 +49,7 @@
     SINGLE_QUOTE = "'"
     WHITE_SPACE="regexp:[ \n\r\t\f]+"
     IDENTIFIER = "regexp:[a-zA-Z0-9][a-zA-Z0-9\-]*"
-
+    STRINGLITERAL = ""
     ]
 }
 
@@ -85,7 +85,7 @@ statement ::= (perform_varying_statement|display_statement|stop_statement)
 
 perform_varying_statement ::= LINE_NUMBER PERFORM_KEYWORD IDENTIFIER VARYING_KEYWORD IDENTIFIER FROM_KEYWORD NUMBER_LITERAL BY_KEYWORD NUMBER_LITERAL UNTIL_KEYWORD condition {pin=2}
 
-display_statement ::= LINE_NUMBER DISPLAY_KEYWORD (IDENTIFIER | NUMBER_LITERAL | SINGLE_QUOTE)+ {pin=2}
+display_statement ::= LINE_NUMBER DISPLAY_KEYWORD (IDENTIFIER | NUMBER_LITERAL | STRING_LITERAL)+ {pin=2} // added string literal,
 
 stop_statement ::= LINE_NUMBER STOP_KEYWORD (RUN_KEYWORD|IDENTIFIER|NUMBER_LITERAL) {pin=2}
 

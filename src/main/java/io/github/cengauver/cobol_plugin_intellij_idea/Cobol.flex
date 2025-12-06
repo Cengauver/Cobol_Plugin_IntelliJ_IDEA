@@ -99,7 +99,10 @@ SINGLE_QUOTE = "'"
     {PERIOD}                  { return CobolTypes.PERIOD; }
     {LPAREN}                  { return CobolTypes.LPAREN; }
     {RPAREN}                  { return CobolTypes.RPAREN; }
-    {SINGLE_QUOTE}            { return CobolTypes.SINGLE_QUOTE; }
+
+    // 3. STRING LITERALS
+    // Matches: A single quote, followed by anything NOT a quote/newline, ending with a quote.
+    {SINGLE_QUOTE} [^'\n\r]* {SINGLE_QUOTE} { return CobolTypes.STRING_LITERAL; }
 
     // 4. USER DEFINED LITERALS & IDENTIFIERS
     // (Keep these BELOW keywords so "DATA" isn't matched as an ID)

@@ -110,8 +110,10 @@ SINGLE_QUOTE = "'"
     {ID_CHAR}+                { return CobolTypes.IDENTIFIER; }
 
     // 5. HOUSEKEEPING
-    {WHITE_SPACE}+            { return TokenType.WHITE_SPACE; }
+    // Order of these 2 rules is important to not confuse line numbers with number literals and break the parser.
     {CRLF}                    { yybegin(YYINITIAL); return TokenType.WHITE_SPACE; }
+    {WHITE_SPACE}+            { return TokenType.WHITE_SPACE; }
+
 
     // 6. ERROR FALLBACK (Crucial!)
     // If we are in CODE_STATE and see something weird, mark it BAD.

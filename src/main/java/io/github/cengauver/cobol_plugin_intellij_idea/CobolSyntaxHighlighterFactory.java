@@ -7,7 +7,7 @@ import com.intellij.openapi.project.Project;
 import com.intellij.openapi.vfs.VirtualFile;
 import org.jetbrains.annotations.NotNull;
 
-public class CobolSyntaxHighlighterFactory extends SyntaxHighlighterFactory {
+final class CobolSyntaxHighlighterFactory extends SyntaxHighlighterFactory {
 
     @NotNull
     @Override
